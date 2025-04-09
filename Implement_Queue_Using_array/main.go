@@ -24,6 +24,7 @@ func (q *Queue) Dequeu() {
 	if q.size == 0 {
 		fmt.Println("empty")
 	}
+	// val := q.arr[q.front]
 	q.front = (q.front + 1) % MAX
 	q.size--
 
