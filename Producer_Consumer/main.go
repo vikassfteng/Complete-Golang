@@ -21,3 +21,38 @@ func main() {
 	go Producer(ch)
 	Consumer(ch)
 }
+
+
+// package main
+
+// import (
+// 	"fmt"
+// )
+
+// func Producer(in <-chan int, out chan<- int) {
+// 	val := <-in
+// 	val += 1
+// 	fmt.Println("Producer processed:", val)
+// 	out <- val
+// }
+
+// func Consumer(ch <-chan int) {
+// 	val := <-ch
+// 	fmt.Println("Consumer received:", val)
+// }
+
+// func main() {
+// 	input := make(chan int)
+// 	output := make(chan int)
+
+
+// 	go Producer(input, output)
+// 	go Consumer(output)
+
+// 	// Send initial value
+// 	input <- 12
+
+// 	// Wait (optional) — or block main from exiting too early
+// 	var dummy string
+// 	fmt.Scanln(&dummy)
+// }
