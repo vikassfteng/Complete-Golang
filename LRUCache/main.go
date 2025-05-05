@@ -7,7 +7,13 @@ import (
 
 type LRUCache struct {
 	capacity int
-	cache    map[int]*list.Element
+	cache    map[int]*list.Element // list.Element is a pointer to the element in the list
+	// The cache is a map that stores the key and the corresponding
+	// element in the list. The key is the key of the key-value pair
+	// and the value is a pointer to the element in the list
+	// The list is a doubly linked list that stores the key-value pairs
+	// The most recently used pairs will be at the front
+	// and the least recently used pairs will be at the back
 	list     *list.List
 }
 type KeyValue struct {
