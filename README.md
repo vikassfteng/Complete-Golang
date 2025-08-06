@@ -82,3 +82,16 @@ A consumer (service, system, etc.) listens for relevant events and processes the
 
 Event Processing:
 Event processors react to events, possibly triggering additional actions or generating new events.
+
+
+PACAKAGE
+When you build reusable pieces of code, you will develop a package as a shared library.
+But when you develop executable programs, you will use the package “main” for making the package as an executable
+program. 
+The package “main” tells the Go compiler that the package should compile as an executable program instead of a shared
+library.
+When you build shared libraries, you will not have any main package and main function in the package.
+Folder name should be same as package name… unless the package is main
+- In Golang we will write a code in a file. Associate Package name with that file. And put that file in a folder having same
+name as package name
+Within a single folder, the package name will be same for the all source files which belong to that directory.
