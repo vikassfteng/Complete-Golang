@@ -2,55 +2,106 @@ package main
 
 import "fmt"
 
+// Node represents a node in a linked list
 type Node struct {
-	value int
-	next  *Node
-	prev  *Node
+	Val  int
+	Next *Node
 }
 
-func NewNode(val int) *Node {
-	return &Node{
-		value: val,
-		next:  nil,
-		prev:  nil,
+// PrintLinkedList prints a linked list in the format val1->val2->val3
+// and returns the head pointer (following Go conventions for chainable methods)
+func PrintLinkedList(head *Node) *Node {
+	if head == nil {
+		return head
 	}
-}
 
-func PrintLL(head *Node) {
 	current := head
 	for current != nil {
-		fmt.Print(current.value)
-		if current.next != nil {
+		fmt.Print(current.Val)
+		if current.Next != nil {
 			fmt.Print("->")
 		}
-		current = current.next
+		current = current.Next
 	}
+	fmt.Println() // Add newline for better output formatting
+	return head
 }
 
-func PrintReverse(tail *Node) {
-	current := tail
-	for current != nil {
-		fmt.Print(current.value)
-		if current.prev != nil {
-			fmt.Print("->")
+func deleteHead(head *Node) *Node {
+	if head == nil {
+		return nil
+	}
+	return head.Next
+}
+
+func deleteTail(head *Node) *Node {
+	if head == nil {
+		return head
+	}
+	// If there's only one node, delete it
+	if head.Next == nil {
+		return nil
+	}
+	current := head
+	// Find the second-to-last node
+	for current.Next.Next != nil {
+		current = current.Next
+	}
+	current.Next = nil
+	return head
+}
+func deleteAtPosition(head *Node, position int) *Node {
+	if head == nil || position < 1 {
+		return head
+	}
+	// If deleting the first position (head)
+	if position == 1 {
+		return head.Next
+	}
+	current := head
+	// Navigate to the node before the one to delete
+	for i := 1; i < position-1 && current.Next != nil; i++ {
+		current = current.Next
+	}
+	// Check if the position exists
+	if current.Next != nil {
+		current.Next = current.Next.Next
+	}
+	return head
+}
+func deleteValue(head *Node, value int) *Node {
+	if head == nil {
+		return head
+	}
+	if head.Val == value {
+		return head.Next
+	}
+	current := head
+	for current.Next != nil {
+		if current.Next.Val == value {
+			current.Next = current.Next.Next
+			break
 		}
-		current = current.prev
+		current = current.Next
 	}
+	return head
 }
-
 func main() {
-
-	node := NewNode(0)
-	current := node
-	temp := current
+	head := &Node{Val: 0}
+	current := head
 
 	for i := 1; i < 5; i++ {
-		current.next = NewNode(i)
-		current = current.next
-		current.prev = temp
-		temp = current
+		current.Next = &Node{Val: i}
+		current = current.Next
 	}
-	PrintLL(node)
-	fmt.Println("\n")
-	PrintReverse(current)
+
+	PrintLinkedList(head)
+	// head = deleteTail(head)
+	// PrintLinkedList(head)
+	// head = deleteAtPosition(head, 1)
+	// PrintLinkedList(head)
+	// head = deleteAtPosition(head, 2)
+	// PrintLinkedList(head)
+	head = deleteValue(head, 0)
+	PrintLinkedList(head)
 }
