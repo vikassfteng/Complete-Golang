@@ -86,6 +86,42 @@ func deleteValue(head *Node, value int) *Node {
 	}
 	return head
 }
+
+func insertAtHead(head *Node, val int) *Node {
+	current := &Node{Val: val}
+	current.Next = head
+	head = current
+	return head
+}
+func insertAtPos(head *Node, k, val int) *Node {
+	if head == nil {
+		if k == 1 {
+			newNode := &Node{Val: val}
+			return newNode
+		} else {
+			return head
+		}
+	}
+	if k == 1 {
+		newNode := &Node{Val: val}
+		newNode.Next = head.Next
+		head.Next = newNode
+		return head
+	}
+	current := head
+	cnt := 0
+	for current != nil {
+		cnt++
+		if cnt == k-1 {
+			newNode := &Node{Val: val}
+			newNode.Next = current.Next
+			current.Next = newNode
+			break
+		}
+		current = current.Next
+	}
+	return head
+}
 func main() {
 	head := &Node{Val: 0}
 	current := head
@@ -102,6 +138,11 @@ func main() {
 	// PrintLinkedList(head)
 	// head = deleteAtPosition(head, 2)
 	// PrintLinkedList(head)
-	head = deleteValue(head, 0)
+	// head = deleteValue(head, 0)
+	// PrintLinkedList(head)
+	// head = insertAtHead(head, 9)
+	// PrintLinkedList(head)
+	head = insertAtPos(head, 1, 9)
 	PrintLinkedList(head)
+
 }
