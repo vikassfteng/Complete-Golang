@@ -8,6 +8,42 @@ type Node struct {
 	Next *Node
 }
 
+func reverse(head *ListNode) *ListNode{
+    temp := head
+    var prev *ListNode = nil
+    for temp != nil{
+        front := temp.Next
+        temp.Next = prev
+        prev = temp
+        temp = front
+    }
+    return prev
+ }
+func isPalindrome(head *ListNode) bool {
+    if head == nil || head.Next == nil {
+        return true
+    }
+    slow := head
+    fast := head
+    for fast != nil && fast.Next != nil{
+        slow = slow.Next
+        fast = fast.Next.Next
+    }
+    newHead := reverse(slow)
+    first := head
+    second := newHead
+    for second != nil{
+        if first.Val != second.Val{
+            reverse(newHead)
+            return false
+        }
+        first = first.Next
+        second = second.Next
+    }
+    reverse(newHead)
+    return true
+}
+
 // PrintLinkedList prints a linked list in the format val1->val2->val3
 // and returns the head pointer (following Go conventions for chainable methods)
 func PrintLinkedList(head *Node) *Node {
