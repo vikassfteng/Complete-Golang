@@ -7,9 +7,9 @@ type Node struct {
 	Val  int
 	Next *Node
 }
-func getIntersectionNode(headA, headB *ListNode) *ListNode {
+func getIntersectionNode(headA, headB *Node) *Node {
     tempA := headA
-    visited := make(map[*ListNode]bool)
+    visited := make(map[*Node]bool)
     for tempA != nil{
         visited[tempA] = true
         tempA = tempA.Next
