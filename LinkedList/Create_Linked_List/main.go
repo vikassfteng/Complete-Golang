@@ -7,6 +7,22 @@ type Node struct {
 	Val  int
 	Next *Node
 }
+func getIntersectionNode(headA, headB *ListNode) *ListNode {
+    tempA := headA
+    visited := make(map[*ListNode]bool)
+    for tempA != nil{
+        visited[tempA] = true
+        tempA = tempA.Next
+    }
+    tempB := headB
+    for tempB != nil{
+        if visited[tempB]{
+            return tempB
+        }
+        tempB = tempB.Next
+    }
+    return nil
+}
 
 func reverse(head *ListNode) *ListNode{
     temp := head
